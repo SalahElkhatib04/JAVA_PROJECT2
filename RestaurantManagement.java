@@ -8,7 +8,7 @@ public class RestaurantManagement {
         restaurant.addMeal(new Meal("Burger", 5.5, "Classic beef burger"));
         restaurant.addMeal(new Meal("Pizza", 13.0, "Margherita pizza"));
         restaurant.addMeal(new Meal("meat", 9.0, "Rice with meat"));
-        restaurant.addMeal(new Meal("Pasta", 20.0, " Pasta white souse"));
+        restaurant.addMeal(new Meal("Pasta", 20.0, " Pasta white sauce"));
         restaurant.addMeal(new Meal("Fried chicken", 10.5, "Fried chicken with fries"));
         restaurant.addMeal(new Meal("Crepe", 6.5, "Chicken crepe"));
 
