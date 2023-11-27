@@ -1,0 +1,37 @@
+public class customerInfo {
+    private static String ID;
+    private String customerName;
+    private String contactNumber;
+
+    public customerInfo(String ID, String customerName, String contactNumber) {
+        this.ID = ID;
+        this.customerName = customerName;
+        this.contactNumber = contactNumber;
+    }
+
+    public static String getID() {
+        return ID;
+    }
+
+    public static void setID(String ID) {
+        customerInfo.ID = ID;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    
+}
