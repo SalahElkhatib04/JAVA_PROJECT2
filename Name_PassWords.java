@@ -19,7 +19,6 @@ public class Name_PassWords {
         return PassWord;
     }
     File file = new File("Admin_Usernames.txt");
-    //File file2 = new File("Admin_Passwords.txt");
 
     public boolean checkUserName_Passwords(String UserName,String PassWord){
         String name;
