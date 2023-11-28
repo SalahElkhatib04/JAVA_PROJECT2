@@ -1,0 +1,105 @@
+import java.io.*;
+import java.util.*;
+
+public class CustomerMenu {
+
+    private static final String customerFilePath = "customerData.txt";
+    private static String[] customerRecord;
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("***************************");
+        System.out.println("Welcome to our Restaurant *");
+        while (true) {
+            System.out.println("***************************");
+            System.out.println("1. Menu");
+            System.out.println("2. Profile");
+            System.out.println("0. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = input.nextInt();
+            System.out.println("***************************");
+
+            switch (choice) {
+                case 1:
+                    displayMenu();
+                    break;
+                case 2:
+                    System.out.println("Login to Your Profile:");
+                    System.out.print("Enter your name: ");
+                    String consumer = input.nextLine();
+                    String name = input.nextLine();
+                    System.out.print("Enter your phone number: ");
+                    String phoneNumber = input.next();
+            System.out.println("***************************");
+
+                    if (isPhoneNumberValid(phoneNumber)) {
+                        if (isUserExist(name, phoneNumber) == 1) {
+                            System.out.println("Login successful!");
+                            displayProfile(customerRecord);
+                        } else if (isUserExist(name, phoneNumber) == 0)
+                            System.out.println("Login failed. User doesn't exist.");
+                        else
+                            System.out.println("Login failed. An error has occurred");
+                    } else
+                        System.out.println("Login failed. Phone number is not valid.");
+                    break;
+                case 0:
+                    System.out.println("Exiting the Restaurant. Goodbye!");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option.");
+            }
+        }
+    }
+
+    private static void displayMenu() {
+        System.out.println("Menu:");
+        System.out.println("1. Dish 1 - $10.99");
+        System.out.println("2. Dish 2 - $12.99");
+        System.out.println("3. Dish 3 - $8.99");
+    }
+
+    private static void displayProfile(String[] customerRecord) {
+        System.out.println("Customer Profile:");
+        System.out.println("ID: " + customerRecord[0]);
+        System.out.println("Name: " + customerRecord[1]);
+        System.out.println("Phone Number: " + customerRecord[2]);
+        System.out.println("No. of Orders: " + customerRecord[3]);
+        System.out.println("Points: " + customerRecord[4]);
+
+        if (Integer.parseInt(customerRecord[3]) >= 10)
+            System.out.println("Congrats You won a 20% voucher");
+        if (Integer.parseInt(customerRecord[4]) >= 300)
+            System.out.println("Congrats You won a free meal");
+    }
+
+    private static boolean isPhoneNumberValid(String phoneNumber) {
+        if (phoneNumber != null && phoneNumber.matches("\\d{11}")) {
+            return true;
+        } else
+            return false;
+    }
+
+    private static int isUserExist(String name, String phoneNumber) {
+        Scanner fr = null;
+        try {
+            fr = new Scanner(new File(customerFilePath));
+            while (fr.hasNextLine()) {
+                customerRecord = fr.nextLine().split(",");
+
+                if (phoneNumber.equals(customerRecord[2]) && name.equals(customerRecord[1])) {
+                    fr.close();
+                    return 1;
+                }
+            }
+            fr.close();
+            return 0;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return -1;
+        }
+    }
+}
