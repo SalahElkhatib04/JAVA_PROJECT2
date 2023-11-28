@@ -26,24 +26,25 @@ public class CustomerMenu {
                     displayMenu();
                     break;
                 case 2:
+                    CustomerInfo c1 = new CustomerInfo();
+
                     System.out.println("Login to Your Profile:");
                     System.out.print("Enter your name: ");
                     String consumer = input.nextLine();
-                    String name = input.nextLine();
+                    c1.setName(input.nextLine());
                     System.out.print("Enter your phone number: ");
-                    String phoneNumber = input.next();
-            System.out.println("***************************");
+                    if (c1.setPhoneNumber(input.nextLine())){
+                        System.out.println("***************************");
 
-                    if (isPhoneNumberValid(phoneNumber)) {
-                        if (isUserExist(name, phoneNumber) == 1) {
+                        if (isUserExist(c1.getName(), c1.getPhoneNumber()) == 1) {
                             System.out.println("Login successful!");
                             displayProfile(customerRecord);
-                        } else if (isUserExist(name, phoneNumber) == 0)
+                        } else if (isUserExist(c1.getName(), c1.getPhoneNumber()) == 0)
                             System.out.println("Login failed. User doesn't exist.");
                         else
                             System.out.println("Login failed. An error has occurred");
                     } else
-                        System.out.println("Login failed. Phone number is not valid.");
+                            System.out.println("Login failed. An error has occurred");
                     break;
                 case 0:
                     System.out.println("Exiting the Restaurant. Goodbye!");
@@ -76,15 +77,8 @@ public class CustomerMenu {
             System.out.println("Congrats You won a free meal");
     }
 
-    private static boolean isPhoneNumberValid(String phoneNumber) {
-        if (phoneNumber != null && phoneNumber.matches("\\d{11}")) {
-            return true;
-        } else
-            return false;
-    }
-
     private static int isUserExist(String name, String phoneNumber) {
-        Scanner fr = null;
+        Scanner fr;
         try {
             fr = new Scanner(new File(customerFilePath));
             while (fr.hasNextLine()) {
