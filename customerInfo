@@ -1,37 +1,69 @@
-public class customerInfo {
-    private static String ID;
-    private String customerName;
-    private String contactNumber;
+public class CustomerInfo{
+    private static int ID = 0;
+    private String name;
+    private String phoneNumber;
+    private int NumOfOrders;
+    private int points;
 
-    public customerInfo(String ID, String customerName, String contactNumber) {
-        this.ID = ID;
-        this.customerName = customerName;
-        this.contactNumber = contactNumber;
+    CustomerInfo(){
+        ID ++;
     }
 
-    public static String getID() {
+    CustomerInfo(String name, String phoneNumber){
+        ID ++;
+        this.name = name;
+        setPhoneNumber(phoneNumber);
+    }
+
+    public static void setID(int ID) {
+        CustomerInfo.ID = ID;
+    }
+
+    public static int getID() {
         return ID;
     }
 
-    public static void setID(String ID) {
-        customerInfo.ID = ID;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getName() {
+        return this.name;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public boolean setPhoneNumber(String phoneNumber) {
+        if (phoneNumber != null && phoneNumber.matches("\\d{11}")) {
+            this.phoneNumber = phoneNumber;
+            return true;
+        } else
+            return false;
     }
 
-    public String getContactNumber() {
-        return contactNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+
+    public boolean setPoints(int points) {
+        if (points >= 0) {
+            this.points = points;
+            return true;
+        } else
+            return false;
     }
 
-    
+    public int getPoints() {
+        return this.points;
+    }
+    public boolean setNumOfOrders(int numOfOrders) {
+        if (numOfOrders >= 0) {
+            NumOfOrders = numOfOrders;
+            return true;
+        } else
+            return false;
+    }
+
+    public int getNumOfOrders() {
+        return this.NumOfOrders;
+    }
 }
